@@ -1,0 +1,15 @@
+version: '3'
+services:
+  alexa-tts:
+    container_name: alexa-tts
+    build: .
+    restart: always
+    volumes:
+      - ${ALEXA_TTS_SECRETS}:/var/data/secrets/alexa-tts
+      - ./alexa-tts:/var/www/html
+    networks:
+      jenkins:
+        ipv4_address: 172.16.1.25
+networks:
+  jenkins:
+    external: true
