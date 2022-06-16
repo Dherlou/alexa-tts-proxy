@@ -9,6 +9,7 @@
     define("WEBHOOK_HASH", $config["webhook"]["hash"]);
 
     // check credentials
+    var_dump($_SERVER);
     $secret = $_SERVER['HTTP_X_WEBHOOK_SECRET'] ?? null;
     if (password_verify($secret, WEBHOOK_HASH) === false) {
         header('HTTP/1.1 403 Forbidden');
