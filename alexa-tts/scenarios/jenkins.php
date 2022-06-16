@@ -23,6 +23,8 @@
     $stream = file_get_contents('php://input');
     $body = json_decode($stream, true);
 
+    var_dump($body['result']);
+
     $project = $body['project'];
     $job = getOutputJob($body['job']);
     $result = getOutputResult($body['result']);
