@@ -6,15 +6,15 @@
     function getOutputJob(string $jobType): string {
         switch ($jobType) {
             case 'build':
-                return 'Der Bauvorgang';
+                return 'Bauvorgang';
             default:
-                return 'Die Veröffentlichung';
+                return 'Veröffentlichung';
         }
     }
     function getOutputResult(string $jobResult): string {
         switch ($jobResult) {
             case 'success':
-                return 'erfolgreich abgeschlossen';
+                return 'erfolgreich';
             default:
                 return 'fehlgeschlagen';
         }
@@ -27,7 +27,7 @@
     $job = getOutputJob($body['job']);
     $result = getOutputResult($body['result']);
 
-    $text = "$project: $job ist $result.";
+    $text = "$project: $job $result.";
 
     AlexaSkillApi::sendText($text);
 ?>
