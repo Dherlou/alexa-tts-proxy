@@ -1,5 +1,7 @@
 version: '3'
 services:
   alexa-tts:
+    environment:
+      - DEVELOPMENT_MODE=1
     volumes:
       - ./alexa-tts:/var/www/html
