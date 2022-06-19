@@ -2,7 +2,7 @@
   <h3 align="center">Alexa TTS Proxy API</h3>
 
   <p align="center">
-    Proxy api for providing custom endpoints for my Alexa TTS use cases.
+    Proxy api for providing custom endpoints for Alexa TTS use cases.
     <br />
     <br />
     <a href="https://www.luckev.info/alexa-tts">My personal installation of this project</a>
