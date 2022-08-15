@@ -5,3 +5,14 @@ services:
       - DEVELOPMENT_MODE=1
     volumes:
       - ./alexa-tts:/var/www/html
+  proxy:
+    container_name: proxy
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - jenkins
+    volumes:
+      - ./nginx/alexa-tts.conf:/etc/nginx/conf.d/alexa-tts.conf
+    restart: always

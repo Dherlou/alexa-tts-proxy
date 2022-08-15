@@ -54,7 +54,11 @@ Once docker is installed, you must follow these steps:
       2. Update the content of this file by pasting the previously noted `id` and `hash` values of each skill.
       3. Create a php password hash with [password_hash](https://www.php.net/manual/en/function.password-hash.php) and paste the resulting hash in the webhook hash field.
       4. Create an environment variable `ALEXA_TTS_SECRETS` which points to the directory in which your `secrets.json` file is located.
-   3. Start the docker run:
+   3. Create the docker network for the containers, e.g.:
+    ```sh
+    docker network create --subnet 172.16.1.7/24 --attachable -d bridge jenkins
+    ```
+   4. Start the docker run:
       * production version:
         ```sh
         docker-compose up -d
