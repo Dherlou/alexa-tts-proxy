@@ -7,7 +7,7 @@ services:
       - ./alexa-tts:/var/www/html
   proxy:
     container_name: proxy
-    image: nginx:latest
+    image: nginx:stable-alpine
     ports:
       - "80:80"
       - "443:443"
