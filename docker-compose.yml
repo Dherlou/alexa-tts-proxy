@@ -6,9 +6,12 @@ services:
     build: .
     restart: always
     volumes:
-      - ${ALEXA_TTS_SECRETS}:/var/data/secrets/alexa-tts
+      - alexa-tts-secrets:/var/data/secrets/alexa-tts
     networks:
       - jenkins
+volumes:
+  alexa-tts-secrets:
+    external: true
 networks:
   jenkins:
     external: true
