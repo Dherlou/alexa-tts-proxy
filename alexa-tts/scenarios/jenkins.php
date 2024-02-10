@@ -1,33 +1,41 @@
 <?php
-    define('__ROOT__', dirname(dirname(__FILE__)));
-    require_once(__ROOT__.'/config.php');
-    require_once(__ROOT__.'/alexa-skill-api.php');
+    require_once(dirname(__DIR__).'/endpoint.php');
 
-    function getOutputJob(string $jobType): string {
-        switch ($jobType) {
-            case 'build':
-                return 'Bauvorgang';
-            default:
-                return 'Veröffentlichung';
+    class JenkinsEndpoint extends Endpoint {
+
+        protected function assembleText(): string
+        {
+            $stream = file_get_contents('php://input');
+            $body = json_decode($stream, true);
+
+            if ($body === null) {
+                return 'Fehler! Die von Jenkins übermittelten Jobdaten konnten nicht ausgelesen werden';
+            }
+
+            $project = $body['project'];
+            $job = $this->getOutputJob($body['job']);
+            $result = $this->getOutputResult($body['result']);
+
+            return "$project: $job $result.";
         }
-    }
-    function getOutputResult(string $jobResult): string {
-        switch ($jobResult) {
-            case 'success':
-                return 'erfolgreich';
-            default:
-                return 'fehlgeschlagen';
+
+        private function getOutputJob(string $jobType): string {
+            switch ($jobType) {
+                case 'build':
+                    return 'Bauvorgang';
+                default:
+                    return 'Veröffentlichung';
+            }
         }
+        private function getOutputResult(string $jobResult): string {
+            switch ($jobResult) {
+                case 'success':
+                    return 'erfolgreich';
+                default:
+                    return 'fehlgeschlagen';
+            }
+        }
+        
     }
 
-    $stream = file_get_contents('php://input');
-    $body = json_decode($stream, true);
-
-    $project = $body['project'];
-    $job = getOutputJob($body['job']);
-    $result = getOutputResult($body['result']);
-
-    $text = "$project: $job $result.";
-
-    AlexaSkillApi::sendText($text);
-?>
+    (new JenkinsEndpoint())->execute();

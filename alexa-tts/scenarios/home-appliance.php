@@ -1,33 +1,39 @@
 <?php
-    define('__ROOT__', dirname(dirname(__FILE__)));
-    require_once(__ROOT__.'/config.php');
-    require_once(__ROOT__.'/alexa-skill-api.php');
+    require_once(dirname(__DIR__).'/endpoint.php');
 
-    function getOutputAppliance(string $jobAppliance): string {
-        switch ($jobAppliance) {
-            case 'dishwasher':
-                return 'der Geschirrspülgang';
-            case 'hob':
-                return 'der Kochvorgang';
-            default:
-                return 'unbekanntes Gerät';
+    class HomeApplianceEndpoint extends Endpoint {
+
+        protected function assembleText(): string
+        {
+            $appliance = $this->getOutputAppliance($_POST['appliance']);
+            $status = $this->getOutputStatus($_POST['status']);
+
+            return "Haushalt: $appliance ist $status.";
         }
-    }
-    function getOutputStatus(string $jobStatus): string {
-        switch ($jobStatus) {
-            case 'started':
-                return 'gestartet';
-            case 'done':
-                return 'fertig';
-            default:
-                return 'in einem unbekannten Zustand';
+
+        private function getOutputAppliance(string $jobAppliance): string {
+            switch ($jobAppliance) {
+                case 'dishwasher':
+                    return 'der Geschirrspülgang';
+                case 'hob':
+                    return 'der Kochvorgang';
+                default:
+                    return 'unbekanntes Gerät';
+            }
         }
+
+        private function getOutputStatus(string $jobStatus): string {
+            switch ($jobStatus) {
+                case 'started':
+                    return 'gestartet';
+                case 'done':
+                    return 'fertig';
+                default:
+                    return 'in einem unbekannten Zustand';
+            }
+        }
+
     }
 
-    $appliance = getOutputAppliance($_POST['appliance']);
-    $status = getOutputStatus($_POST['status']);
-
-    $text = "Haushalt: $appliance ist $status.";
-
-    AlexaSkillApi::sendText($text);
+    (new HomeApplianceEndpoint())->execute();
 ?>

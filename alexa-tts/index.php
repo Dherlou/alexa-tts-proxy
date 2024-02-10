@@ -1,9 +1,14 @@
 <?php
-    define('__ROOT__', dirname(__FILE__));
-    require_once(__ROOT__.'/config.php');
-    require_once(__ROOT__.'/alexa-skill-api.php');
+    require_once(__DIR__.'/endpoint.php');
 
-    $text = $_POST['text'];
-    
-    AlexaSkillApi::sendText($text);
+    class IndexEndpoint extends Endpoint {
+
+        protected function assembleText(): string
+        {
+            return $_REQUEST['text'];
+        }
+
+    }
+
+    (new IndexEndpoint())->execute();
 ?>
