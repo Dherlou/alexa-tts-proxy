@@ -10,8 +10,42 @@
 
         protected function assembleText(): string
         {
-            file_put_contents('debug.log', json_encode($_SERVER) . "\r\n" . json_encode($_REQUEST) . "\r\n----\r\n", FILE_APPEND);
-            return 'test';
+            $stream = file_get_contents('php://input');
+            $body = json_decode($stream, true);
+
+            if ($body === null) {
+                return 'Fehler! Die von Wordpress übermittelten Jobdaten konnten nicht ausgelesen werden.';
+            }
+
+            $namesData = $this->getNames($body);
+            $names = $this->formatNames($namesData);
+
+            return "$names " . ((count($namesData) > 1) ? 'haben' : 'hat' ) . ' sich zur Hochzeit angemeldet.';
+        }
+
+        private function getNames(array $body): array
+        {
+            $fnKeys = preg_grep("/name_1_first_name(_\d+)?/", array_keys($body));
+            return array_map(fn ($key) => $body[$key] . $body[str_replace('first', 'last', $key)], $fnKeys);
+        }
+
+        private function formatNames(array $names): string
+        {
+            return implode(
+                ' und ',
+                array_filter(
+                    array_merge(
+                        [
+                            implode(
+                                ', ',
+                                array_slice($names, 0, -1)
+                            )
+                        ],
+                        array_slice($names, -1)
+                    ),
+                    'strlen'
+                )
+            );
         }
 
     }

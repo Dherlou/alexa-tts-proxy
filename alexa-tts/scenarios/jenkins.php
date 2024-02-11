@@ -9,7 +9,7 @@
             $body = json_decode($stream, true);
 
             if ($body === null) {
-                return 'Fehler! Die von Jenkins übermittelten Jobdaten konnten nicht ausgelesen werden';
+                return 'Fehler! Die von Jenkins übermittelten Jobdaten konnten nicht ausgelesen werden.';
             }
 
             $project = $body['project'];
