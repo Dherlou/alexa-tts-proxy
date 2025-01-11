@@ -19,12 +19,21 @@
 
             error_log(json_encode($body));
 
-            // echo body to read it in docker logs?
+            // participation
+            $firstName = $body['name_1'];
+            $lastName = $body['name_2'];
+            $participation = $body['select_1'] === 'true';
+            $whatsAppCommunityConsent = $body['consent_2'] === 'checked';
 
-            $namesData = $this->getNames($body);
-            $names = $this->formatNames($namesData);
+            $output = sprintf(
+                '%s %s nimmt an der Hochzeit %s teil %s.',
+                $firstName,
+                $lastName,
+                $participation ? '' : 'nicht',
+                $whatsAppCommunityConsent ? 'und möchte zur Whatsapp-Community hinzugefügt werden' : ''
+            );
 
-            return "$names " . ((count($namesData) > 1) ? 'haben' : 'hat' ) . ' sich zur Hochzeit angemeldet.';
+            return $output;
         }
 
         private function getNames(array $body): array
