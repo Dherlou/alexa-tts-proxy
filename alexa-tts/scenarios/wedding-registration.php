@@ -17,6 +17,10 @@
                 return 'Fehler! Die von Wordpress übermittelten Jobdaten konnten nicht ausgelesen werden.';
             }
 
+            error_log(json_encode($body));
+
+            // echo body to read it in docker logs?
+
             $namesData = $this->getNames($body);
             $names = $this->formatNames($namesData);
 
