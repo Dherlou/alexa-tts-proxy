@@ -21,7 +21,7 @@
 
             // log request for debugging
 
-            fwrite(STDOUT, json_encode($body));
+            error_log(json_encode($body));
 
             // participation
 
