@@ -38,19 +38,21 @@
                 $whatsAppCommunityConsent ? 'und möchte zur Whatsapp-Community hinzugefügt werden' : ''
             );
 
+            if (!$participation) {
+                return $output;
+            }
+
             // media usage
 
             $mediaUsageCreation = isset($body['consent_5']);
-            $output .= sprintf(
-                'Anfertigung von Medienaufnahmen: %s einverstanden. ',
-                $mediaUsageCreation ? '' : 'nicht'
-            );
+            if (!$mediaUsageCreation) {
+                $output .= 'Anfertigung von Medienaufnahmen: nicht einverstanden. ';
+            }
 
             $mediaUsagePublication = isset($body['consent_6']);
-            $output .= sprintf(
-                'Veröffentlichung von Medienaufnahmen: %s einverstanden. ',
-                $mediaUsagePublication ? '' : 'nicht'
-            );
+            if (!$mediaUsagePublication) {
+                $output .= 'Veröffentlichung von Medienaufnahmen: nicht einverstanden. ';
+            }
 
             // eating organization
 
