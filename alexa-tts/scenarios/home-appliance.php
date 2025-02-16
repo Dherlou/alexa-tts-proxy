@@ -29,10 +29,8 @@
             switch ($jobStatus) {
                 case 'started':
                     return 'gestartet';
-                case 'done':
-                    return 'fertig';
                 default:
-                    return 'in einem unbekannten Zustand';
+                    return 'fertig';
             }
         }
 
