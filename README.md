@@ -5,7 +5,7 @@
     Proxy api for providing custom endpoints for Alexa TTS use cases.
     <br />
     <br />
-    <a href="https://www.luckev.info/alexa-tts">My personal installation of this project</a>
+    <a href="https://alexa-tts.lucas.roth-familie.eu">My personal installation of this project</a>
     ·
     <a href="https://github.com/Dherlou/alexa-tts/issues">Report Bug</a>
     ·
@@ -29,9 +29,6 @@ Proxy api for providing custom endpoints for Alexa TTS use cases:
 ## Getting Started
 
 To get a local copy up and running follow these simple steps.
-
-### Current build status:
-My personal installation:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://luckev.info/jenkins/buildStatus/icon?job=Projects%2FAlexaTTS%2FBuild%2BDeploy)](https://luckev.info/jenkins/job/Projects/job/AlexaTTS/job/Build+Deploy/)
 
 ### Prerequisites
 
@@ -96,7 +93,7 @@ Distributed under the GNU Affero General Public License. See [LICENSE](./LICENSE
 <!-- CONTACT -->
 ## Contact
 
-Lucas Kinne - lucas@luckev.info
+Lucas Roth - lucas@roth-familie.eu
 
 Project Link: https://github.com/Dherlou/alexa-tts
 
