@@ -2,7 +2,7 @@ version: '3'
 services:
   alexa-tts:
     container_name: alexa-tts
-    image: dev96pad/alexa-tts:latest
+    image: jenkinsluckev/alexa-tts:latest
     build: .
     restart: always
     volumes:
